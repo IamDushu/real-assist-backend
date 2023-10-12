@@ -64,7 +64,7 @@ const generateReport = async (req, res) => {
           : puppeteer.executablePath(),
     });
     const page = await browser.newPage();
-    await page.goto("https://real-assist-backend.onrender.com/report", {
+    await page.goto("https://real-assist-backend.onrender.com/api/report", {
       waitUntil: "networkidle2",
     });
 
