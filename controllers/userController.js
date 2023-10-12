@@ -38,9 +38,12 @@ const generateReport = async (req, res) => {
     requestBody = req.body;
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("http://localhost:5000/report", {
-      waitUntil: "networkidle2",
-    });
+    await page.goto(
+      "https://real-assist-backend.onrender.com/report",
+      {
+        waitUntil: "networkidle2",
+      },
+    );
 
     await page.setViewport({ width: 595, height: 842 });
 
