@@ -1,8 +1,22 @@
 const puppeteer = require("puppeteer");
-const path = require("path");
+const firebase = require("firebase/app");
+const { getStorage, ref, uploadBytes, getDownloadURL } = require("firebase/storage")
+require("firebase/storage");
 require("dotenv").config();
 
 var requestBody;
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBz9GOcAyJsrg6t0Xlp8P-qTOT_BnhuxuU",
+  authDomain: "real-assist-pdf.firebaseapp.com",
+  projectId: "real-assist-pdf",
+  storageBucket: "real-assist-pdf.appspot.com",
+  messagingSenderId: "23790003857",
+  appId: "1:23790003857:web:4ca768032525a375c38130",
+};
+
+firebase.initializeApp(firebaseConfig);
+const storage = getStorage();
 
 const loadReport = async (req, res) => {
   try {
@@ -42,28 +56,23 @@ const generateReport = async (req, res) => {
         "--disable-setuid-sandbox",
         "--no-sandbox",
         "--single-process",
-        "--no-zygote"
+        "--no-zygote",
       ],
-      executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath()
+      executablePath:
+        process.env.NODE_ENV === "production"
+          ? process.env.PUPPETEER_EXECUTABLE_PATH
+          : puppeteer.executablePath(),
     });
     const page = await browser.newPage();
-    await page.goto(
-      "https://real-assist-backend.onrender.com/report",
-      {
-        waitUntil: "networkidle2",
-      },
-    );
+    await page.goto("https://real-assist-backend.onrender.com/report", {
+      waitUntil: "networkidle2",
+    });
 
     await page.setViewport({ width: 595, height: 842 });
 
     const todayDate = new Date();
 
     const pdfBuffer = await page.pdf({
-      path: `${path.join(
-        __dirname,
-        "../public/files",
-        todayDate.getTime() + ".pdf",
-      )}`,
       printBackground: true,
       format: "A4",
     });
@@ -72,13 +81,16 @@ const generateReport = async (req, res) => {
 
     const pdfFileName = todayDate.getTime() + ".pdf";
 
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename="${pdfFileName}"`,
-    );
+    // Create a reference to the desired storage location
+    const storageRef = ref(storage, `pdfs/${pdfFileName}`);
 
-    res.send(pdfBuffer);
+    // Upload the PDF to Firebase Storage
+    await uploadBytes(storageRef, pdfBuffer);
+
+    // Get the download URL
+      const pdfURL = await getDownloadURL(storageRef);
+
+      res.status(200).json({ pdfURL });
 
     // res.download(pdfURL, function (err) {
     //   if (errr) {
