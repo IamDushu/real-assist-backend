@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  height: 36px;
+  margin: 16px;
+}
+
+header div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header div p {
+  margin: 0px;
+  font-weight: 900;
+  font-size: 9px;
+  line-height: 16px;
+}
+
+header img {
+  width: 150px;
+}
+
+hr {
+  height: 2px;
+  border: none;
+  background-image: linear-gradient(to right, #005dff, #21ddff);
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#card1 .chart {
+  height: 120px;
+}
+
+#card2 .chart {
+  height: 110px;
+}
+
+.card-detail {
+  display: flex;
+  align-items: center;
+}
+
+.card-detail p {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  color: #090e24;
+  line-height: 24px;
+  padding: 0px 7px 0px 3px;
+}
+
+.line {
+  height: 2px;
+  width: 100%;
+  background-image: linear-gradient(to right, #005dff, #21ddff);
+}
+
+.card-item {
+  margin: 16px;
+}
+
+.card-head {
+  background-color: #e8eefb;
+  border-radius: 12px 12px 0px 0px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.card-head p {
+  color: #1463ff;
+  font-weight: 500;
+  font-size: 9px;
+  margin: 0px;
+  line-height: 10px;
+}
+
+.chart-component {
+  background-color: #f2f4f5;
+  border-radius: 0px 0px 12px 12px;
+  height: 100%;
+  padding: 15px 20px 15px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.chart-component span {
+  color: #1e1e1e;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 10px;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+}
+
+.chart {
+  height: 180px;
+  width: 100%;
+  border-radius: 12.34px;
+  background-color: white;
+  margin: auto;
+  margin-left: 5px;
+}
+
+footer {
+  position: absolute;
+  height: 26px;
+  margin: 16px;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+}
+
+footer div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-title {
+  color: #1463ff;
+  width: 189px;
+  height: 16px;
+  font-weight: 900;
+  font-size: 9px;
+  margin: 0px;
+  line-height: 16px;
+}
+
+.footer-detail {
+  font-weight: 900;
+  font-size: 9px;
+  line-height: 16px;
+  color: #090e24;
+  margin: 0px;
+}
+
+.footer-detail span {
+  color: #626e99;
+}
